@@ -1,5 +1,18 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
+
 export function AttendanceIndex(props) {
+  // const [teacherid, setTeacherId] = useState();
+
+  // useEffect(() => {
+  //   const teacherid = localStorage.getItem("teacher_id");
+  //   setTeacherId(teacherid);
+  // });
+
+  // if (!teacherid) {
+  //   return null;
+  // }
+
   return (
     <div>
       <h1>All attendances</h1>

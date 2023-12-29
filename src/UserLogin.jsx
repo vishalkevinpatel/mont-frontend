@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const jwt = localStorage.getItem("jwt");
 if (jwt) {
@@ -8,6 +8,25 @@ if (jwt) {
 
 export function UserLogin() {
   const [errors, setErrors] = useState([]);
+
+  const [userid, setUserId] = useState();
+
+  useEffect(() => {
+    const userid = localStorage.getItem("user_id");
+    setUserId(userid);
+  });
+
+  const teacherid = localStorage.getItem("teacher_id") !== null;
+
+  if (userid) {
+    // If teacherid does not exist, return null or an alternative component
+    return null;
+  }
+
+  if (teacherid) {
+    // If teacherid does not exist, return null or an alternative component
+    return null;
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,6 +38,7 @@ export function UserLogin() {
         console.log(response.data);
         axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.jwt;
         localStorage.setItem("jwt", response.data.jwt);
+        localStorage.setItem("user_id", response.data.user_id);
         event.target.reset();
         window.location.href = "/"; // Change this to hide a modal, redirect to a specific page, etc.
       })
@@ -30,7 +50,7 @@ export function UserLogin() {
 
   return (
     <div id="login">
-      <h1>Login</h1>
+      <h1>User Login</h1>
       <ul>
         {errors.map((error) => (
           <li key={error}>{error}</li>

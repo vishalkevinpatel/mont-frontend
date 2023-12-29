@@ -6,6 +6,7 @@ export function LogoutLink() {
     delete axios.defaults.headers.common["Authorization"];
     localStorage.removeItem("jwt");
     localStorage.removeItem("teacher_id");
+    localStorage.removeItem("user_id");
     window.location.href = "/";
   };
 

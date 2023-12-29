@@ -9,6 +9,11 @@ export function AttendanceNew(props) {
     setTeacherId(teacherid);
   });
 
+  if (!teacherid) {
+    // If teacherid does not exist, return null or an alternative component
+    return null;
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const params = new FormData(event.target);
@@ -33,14 +38,25 @@ export function AttendanceNew(props) {
           </select>
         </div>
         <div>
-          Date: <input name="date" type="text" />
+          Date: <input name="date" type="text" defaultValue={new Date().toISOString().split("T")[0]} />
         </div>
         <div>
-          Presence: <input name="presence" type="text" />
+          Presence:{" "}
+          <select name="presence">
+            <option value="" disabled>
+              Select presence
+            </option>
+            <option value="true">Present</option>
+            <option value="false">Truant</option>
+          </select>
         </div>
-        <div>
-          <input defaultValue={teacherid} name="teacher_id" type="text" hidden />
-        </div>
+        {teacherid ? (
+          <input name="teacher" type="hidden" value={teacherid} />
+        ) : (
+          <div>
+            Teacher: <input name="teacher" type="text" />
+          </div>
+        )}
         <button type="submit">Create Attendance</button>
       </form>
     </div>

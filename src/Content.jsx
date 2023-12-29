@@ -11,23 +11,56 @@ import { StudentsShow } from "./StudentsShow";
 import { AttendanceIndex } from "./AttendanceIndex";
 import { AttendanceNew } from "./AttendanceNew";
 import { AttendanceShow } from "./AttendanceShow";
+import { MessageIndex } from "./MessageIndex";
+import { MessagesNew } from "./MessagesNew";
 import { Modal } from "./Modal";
 
 export function Content() {
   const [students, setStudents] = useState([]);
   const [attendances, setAttendances] = useState([]);
   const [users, setUsers] = useState([]);
+  const [messages, setMessages] = useState([]);
+  const [teachers, setTeachers] = useState([]);
   const [isStudentsShowVisible, setIsStudentsShowVisible] = useState(false);
   const [currentStudent, setCurrentStudent] = useState({});
   const [isAttendancesShowVisible, setIsAttendancesShowVisible] = useState(false);
   const [currentAttendance, setCurrentAttendance] = useState({});
 
+  // const handleStudentIndex = () => {
+  //   console.log("handleStudentIndex");
+  //   axios.get("http://localhost:3000/students.json").then((response) => {
+  //     console.log(response.date);
+  //     setStudents(response.data);
+  //   });
+  // };
+
   const handleStudentIndex = () => {
-    console.log("handleStudentIndex");
-    axios.get("http://localhost:3000/students.json").then((response) => {
-      console.log(response.date);
-      setStudents(response.data);
-    });
+    const userId = localStorage.getItem("user_id");
+    if (userId) {
+      axios
+        .get(`http://localhost:3000/users/${userId}.json`)
+        .then((response) => {
+          const user = response.data;
+          if (user && Array.isArray(user.students)) {
+            console.log("User-specific students:", user.students);
+            const userStudents = user.students.filter((student) => student.user_id === parseInt(userId, 10));
+            setStudents(userStudents);
+          } else {
+            console.log("Error: No students array found in user info");
+            setStudents([]);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching user-specific students:", error);
+          setStudents([]);
+        });
+    } else {
+      console.log("handleStudentIndex");
+      axios.get("http://localhost:3000/students.json").then((response) => {
+        console.log(response.data);
+        setStudents(response.data);
+      });
+    }
   };
 
   const handleStudentNew = (params, successCallback) => {
@@ -132,18 +165,91 @@ export function Content() {
     });
   };
 
+  // const handleMessageIndex = () => {
+  //   const userId = localStorage.getItem("user_id");
+
+  //   if (userId) {
+  //     console.log("handleMessageIndex");
+  //     axios.get(`http://localhost:3000/users/${userId}.json`).then((response) => {
+  //       console.log(response.data);
+  //       setMessages(response.data);
+  //     });
+  //   } else {
+  //     console.log("handleMessageIndex");
+  //     axios.get("http://localhost:3000/messages.json").then((response) => {
+  //       console.log(response.date);
+  //       setMessages(response.data);
+  //     });
+  //   }
+  // };
+
+  const handleMessageIndex = () => {
+    const userId = localStorage.getItem("user_id");
+
+    if (userId) {
+      console.log("handleMessageIndex for user:", userId);
+      axios
+        .get(`http://localhost:3000/users/${userId}.json`)
+        .then((response) => {
+          const user = response.data;
+          if (user && Array.isArray(user.messages)) {
+            console.log("User-specific messages:", user.messages);
+            setMessages(user.messages);
+          } else {
+            console.log("Error: No messages array found in user info");
+            setMessages([]);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching user-specific messages:", error);
+          setMessages([]);
+        });
+    } else {
+      console.log("handleMessageIndex for all messages");
+      axios
+        .get("http://localhost:3000/messages.json")
+        .then((response) => {
+          console.log(response.data);
+          setMessages(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching all messages:", error);
+          setMessages([]);
+        });
+    }
+  };
+
+  const handleMessageNew = (params, successCallback) => {
+    console.log("handleMessageNew", params);
+    axios.post("http://localhost:3000/messages.json", params).then((response) => {
+      setMessages([...messages, response.data]);
+      successCallback();
+    });
+  };
+
+  const handleTeacherIndex = () => {
+    console.log("handleTeacherIndex");
+    axios.get("http://localhost:3000/teachers.json").then((response) => {
+      console.log(response.date);
+      setTeachers(response.data);
+    });
+  };
+
   useEffect(handleStudentIndex, []);
   useEffect(handleAttendanceIndex, []);
   useEffect(handleUserIndex, []);
+  useEffect(handleMessageIndex, []);
+  useEffect(handleTeacherIndex, []);
 
   return (
     <div>
+      <h1>Kinder-Care</h1>
       <UserSignup />
       <UserLogin />
       <TeacherSignup />
       <TeacherLogin />
+      <StudentIndex users={users} students={students} onShowStudent={handleShowStudent} />
       <StudentsNew users={users} onCreateStudent={handleStudentNew} />
-      <StudentIndex students={students} onShowStudent={handleShowStudent} />
       <Modal show={isStudentsShowVisible} onClose={handleClose}>
         <StudentsShow
           student={currentStudent}
@@ -152,6 +258,7 @@ export function Content() {
         />
       </Modal>
       <AttendanceIndex attendances={attendances} onShowAttendance={handleShowAttendance} />
+      <AttendanceNew students={students} onCreateAttendance={handleAttendanceNew} />
       <Modal show={isAttendancesShowVisible} onClose={handleClose}>
         <AttendanceShow
           attendance={currentAttendance}
@@ -159,8 +266,9 @@ export function Content() {
           onDestroyAttendance={handleDestroyAttendance}
         />
       </Modal>
-      <AttendanceNew students={students} onCreateAttendance={handleAttendanceNew} />
-      <span>omg all the info needs to go in here</span>
+      <MessagesNew users={users} students={students} teachers={teachers} onCreateMessage={handleMessageNew} />
+      <MessageIndex messages={messages} />
+      <span>Hope you enjoyed your visit</span>
     </div>
   );
 }

@@ -8,6 +8,17 @@ export function StudentsNew(props) {
     const teacherid = localStorage.getItem("teacher_id");
     setTeacherId(teacherid);
   });
+  const [userid, setUserId] = useState();
+
+  useEffect(() => {
+    const userid = localStorage.getItem("user_id");
+    setUserId(userid);
+  });
+
+  if (!teacherid) {
+    // If teacherid does not exist, return null or an alternative component
+    return null;
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();

@@ -10,29 +10,47 @@ export function StudentsShow(props) {
     props.onDestroyStudent(props.student);
   };
 
+  const teacherid = localStorage.getItem("teacher_id") !== null;
+
   return (
     <div>
       <h1>Student Info</h1>
       <p>Name: {props.student.name} </p>
       <p>Image: {props.student.image_url} </p>
       <p>Teacher: {props.student.teacher} </p>
-      <p>Parent: {props.student.user} </p>
-      <form onSubmit={handleSubmit}>
+      {props.student.attendances && props.student.attendances.length > 0 && (
         <div>
-          Name: <input defaultValue={props.student.name} name="name" type="text" />
+          <p>Attendances:</p>
+          <ul>
+            {props.student.attendances.map((attendance) => (
+              <li key={attendance.id}>
+                Date: {attendance.date}, Presence: {attendance.presence.toString()}
+              </li>
+            ))}
+          </ul>
         </div>
-        <div>
-          Image: <input defaultValue={props.student.image_url} name="image_ulr" type="text" />
-        </div>
-        <div>
-          Teacher: <input defaultValue={props.student.teacher} name="teacher" type="text" />
-        </div>
-        <div>
-          Parent: <input defaultValue={props.student.user} name="user" type="text" />
-        </div>
-        <button type="submit">Update info</button>
-      </form>
-      <button onClick={handleClick}>Erase Student File</button>
+      )}
+      {teacherid && (
+        <>
+          <p>Parent: {props.student.user} </p>
+          <form onSubmit={handleSubmit}>
+            <div>
+              Name: <input defaultValue={props.student.name} name="name" type="text" />
+            </div>
+            <div>
+              Image: <input defaultValue={props.student.image_url} name="image_ulr" type="text" />
+            </div>
+            <div>
+              Teacher: <input defaultValue={props.student.teacher.name} name="teacher" type="text" />
+            </div>
+            <div>
+              Parent: <input defaultValue={props.student.user} name="user" type="text" />
+            </div>
+            <button type="submit">Update info</button>
+          </form>
+          <button onClick={handleClick}>Erase Student File</button>
+        </>
+      )}
     </div>
   );
 }

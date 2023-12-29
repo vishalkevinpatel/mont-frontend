@@ -1,8 +1,32 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function TeacherSignup() {
+  const [teacherid, setTeacherId] = useState();
+
+  useEffect(() => {
+    const teacherid = localStorage.getItem("teacher_id");
+    setTeacherId(teacherid);
+  });
+
   const [errors, setErrors] = useState([]);
+
+  const [userid, setUserId] = useState();
+
+  useEffect(() => {
+    const userid = localStorage.getItem("user_id");
+    setUserId(userid);
+  });
+
+  if (userid) {
+    // If teacherid does not exist, return null or an alternative component
+    return null;
+  }
+
+  if (teacherid) {
+    // If teacherid does not exist, return null or an alternative component
+    return null;
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,7 +47,7 @@ export function TeacherSignup() {
 
   return (
     <div id="signup">
-      <h1>Signup</h1>
+      <h1>Teacher Signup</h1>
       <ul>
         {errors.map((error) => (
           <li key={error}>{error}</li>
