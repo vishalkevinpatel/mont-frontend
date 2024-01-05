@@ -24,9 +24,9 @@ export function AttendanceNew(props) {
     <div>
       <h1>Attendance</h1>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-group align-items-center justify-content-center text-center" style={{ width: 200 }}>
           Name:{" "}
-          <select name="student_id">
+          <select className="form-select" name="student_id">
             <option value="" disabled>
               Select a student
             </option>
@@ -57,7 +57,9 @@ export function AttendanceNew(props) {
             Teacher: <input name="teacher" type="text" />
           </div>
         )}
-        <button type="submit">Create Attendance</button>
+        <button className="btn btn-primary" style={{ margin: 20 }} type="submit">
+          Create Attendance
+        </button>
       </form>
     </div>
   );

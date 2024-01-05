@@ -16,7 +16,15 @@ export function AttendanceIndex(props) {
                 Presence: <input type="checkbox" checked={attendance.presence} readOnly />{" "}
               </p>
             </label>
-            <button onClick={() => props.onShowAttendance(attendance)}>Edit</button>
+            <span></span>
+            <span></span>
+            <button
+              className="btn btn-primary"
+              style={{ margin: 20 }}
+              onClick={() => props.onShowAttendance(attendance)}
+            >
+              Edit
+            </button>
           </div>
         ))}
       </div>

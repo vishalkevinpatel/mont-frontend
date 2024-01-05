@@ -76,7 +76,9 @@ export function MessagesNew(props) {
               </select>
             </div>
           )}
-          <button type="submit">Create Message</button>
+          <button className="btn btn-primary" style={{ margin: 20 }} type="submit">
+            Create Message
+          </button>
         </form>
       </div>
     );

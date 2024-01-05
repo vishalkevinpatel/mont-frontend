@@ -17,7 +17,9 @@ export function MessageIndex(props) {
             <p>Message: {message.text}</p>
             <p>Teacher: {message.teacher} </p>
             <p>Parent: {message.parent}</p>
-            <button onClick={() => handleClick(message.id)}>Erase Message</button>
+            <button className="btn btn-primary" style={{ margin: 20 }} onClick={() => handleClick(message.id)}>
+              Erase Message
+            </button>
           </div>
         ))}
       </div>

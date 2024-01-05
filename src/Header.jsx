@@ -2,13 +2,7 @@ export function Header() {
   const userid = localStorage.getItem("user_id") === null;
   const teacherid = localStorage.getItem("teacher_id") === null;
   if (!userid || !teacherid) {
-    return (
-      <header>
-        <nav>
-          <a href="#">Home</a>
-        </nav>
-      </header>
-    );
+    return null;
   } else {
     return (
       <div>

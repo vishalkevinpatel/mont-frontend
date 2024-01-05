@@ -54,7 +54,7 @@ export function StudentsNew(props) {
             ))}
           </select>
         </div>
-        <button className="btn" type="submit">
+        <button className="btn btn-primary" style={{ margin: 20 }} type="submit">
           {" "}
           Create Student File{" "}
         </button>

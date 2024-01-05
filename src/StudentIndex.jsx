@@ -15,7 +15,9 @@ export function StudentIndex(props) {
                 <h4> Parent: {student.user} </h4>
               </>
             )}
-            <button onClick={() => props.onShowStudent(student)}>more info</button>
+            <button className="btn btn-primary" style={{ margin: 20 }} onClick={() => props.onShowStudent(student)}>
+              more info
+            </button>
           </div>
         ))}
       </div>

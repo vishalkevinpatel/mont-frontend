@@ -28,9 +28,13 @@ export function AttendanceShow(props) {
             <option value="false">False</option>
           </select>
         </p>
-        <button type="submit">Update Truancy</button>
+        <button className="btn btn-primary" style={{ margin: 20 }} type="submit">
+          Update Truancy
+        </button>
       </form>
-      <button onClick={handleClick}>Delete Day</button>
+      <button className="btn btn-primary" style={{ margin: 20 }} onClick={handleClick}>
+        Delete Day
+      </button>
     </div>
   );
 }
