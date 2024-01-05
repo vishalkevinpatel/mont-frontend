@@ -10,9 +10,15 @@ export function LogoutLink() {
     window.location.href = "/";
   };
 
-  return (
-    <a href="#" onClick={handleClick}>
-      Logout
-    </a>
-  );
+  const userid = localStorage.getItem("user_id") === null;
+  const teacherid = localStorage.getItem("teacher_id") === null;
+  if (!userid || !teacherid) {
+    return (
+      <a href="#" onClick={handleClick}>
+        Logout
+      </a>
+    );
+  } else {
+    return <div> </div>;
+  }
 }

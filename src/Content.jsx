@@ -116,12 +116,49 @@ export function Content() {
     });
   };
 
+  // const handleAttendanceIndex = () => {
+  //   console.log("handleAttendanceIndex");
+  //   axios.get(`http://localhost:3000/attendances.json`).then((response) => {
+  //     console.log(response.data);
+  //     setAttendances(response.data);
+  //   });
+  // };
+
   const handleAttendanceIndex = () => {
-    console.log("handleAttendanceIndex");
-    axios.get(`http://localhost:3000/attendances.json`).then((response) => {
-      console.log(response.data);
-      setAttendances(response.data);
-    });
+    const userId = localStorage.getItem("user_id");
+
+    if (userId) {
+      console.log("handleAttendanceIndex for user:", userId);
+      axios
+        .get(`http://localhost:3000/attendances.json`)
+        .then((response) => {
+          const allAttendances = response.data;
+
+          // Filter attendances based on user_id
+          const userAttendances = allAttendances.filter((attendance) => {
+            return attendance.student && attendance.student.user_id === parseInt(userId);
+          });
+
+          console.log("User-specific attendances:", userAttendances);
+          setAttendances(userAttendances);
+        })
+        .catch((error) => {
+          console.error("Error fetching all attendances:", error);
+          setAttendances([]);
+        });
+    } else {
+      console.log("handleAttendanceIndex");
+      axios
+        .get(`http://localhost:3000/attendances.json`)
+        .then((response) => {
+          console.log(response.data);
+          setAttendances(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching all attendances:", error);
+          setAttendances([]);
+        });
+    }
   };
 
   const handleAttendanceNew = (params, successCallback) => {
@@ -227,6 +264,24 @@ export function Content() {
     });
   };
 
+  const handleDestroyMessage = (message) => {
+    console.log("handleDestroyMessage", message);
+
+    if (message && message.id) {
+      axios
+        .delete(`http://localhost:3000/messages/${message.id}.json`)
+        .then((response) => {
+          setMessages(messages.filter((p) => p.id !== message.id));
+          handleClose();
+        })
+        .catch((error) => {
+          console.error("Error deleting message:", error);
+        });
+    } else {
+      console.error("Error: Message or its ID is undefined");
+    }
+  };
+
   const handleTeacherIndex = () => {
     console.log("handleTeacherIndex");
     axios.get("http://localhost:3000/teachers.json").then((response) => {
@@ -242,7 +297,7 @@ export function Content() {
   useEffect(handleTeacherIndex, []);
 
   return (
-    <div>
+    <div className="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
       <h1>Kinder-Care</h1>
       <UserSignup />
       <UserLogin />
@@ -257,8 +312,8 @@ export function Content() {
           onDestroyStudent={handleDestroyStudent}
         />
       </Modal>
-      <AttendanceIndex attendances={attendances} onShowAttendance={handleShowAttendance} />
       <AttendanceNew students={students} onCreateAttendance={handleAttendanceNew} />
+      <AttendanceIndex users={users} attendances={attendances} onShowAttendance={handleShowAttendance} />
       <Modal show={isAttendancesShowVisible} onClose={handleClose}>
         <AttendanceShow
           attendance={currentAttendance}
@@ -267,8 +322,8 @@ export function Content() {
         />
       </Modal>
       <MessagesNew users={users} students={students} teachers={teachers} onCreateMessage={handleMessageNew} />
-      <MessageIndex messages={messages} />
-      <span>Hope you enjoyed your visit</span>
+      <MessageIndex messages={messages} onDestroyMessage={handleDestroyMessage} />
+      <span></span>
     </div>
   );
 }

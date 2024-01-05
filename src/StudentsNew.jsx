@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 
@@ -52,7 +54,10 @@ export function StudentsNew(props) {
             ))}
           </select>
         </div>
-        <button type="submit"> Create Student File </button>
+        <button className="btn" type="submit">
+          {" "}
+          Create Student File{" "}
+        </button>
       </form>
     </div>
   );

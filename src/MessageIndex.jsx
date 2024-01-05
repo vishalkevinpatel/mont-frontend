@@ -2,6 +2,11 @@
 export function MessageIndex(props) {
   const userid = localStorage.getItem("user_id") === null;
   const teacherid = localStorage.getItem("teacher_id") === null;
+
+  const handleClick = (id) => {
+    props.onDestroyMessage(id);
+  };
+
   if (!userid || !teacherid) {
     return (
       <div>
@@ -12,6 +17,7 @@ export function MessageIndex(props) {
             <p>Message: {message.text}</p>
             <p>Teacher: {message.teacher} </p>
             <p>Parent: {message.parent}</p>
+            <button onClick={() => handleClick(message.id)}>Erase Message</button>
           </div>
         ))}
       </div>
