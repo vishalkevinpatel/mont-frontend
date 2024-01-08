@@ -24,7 +24,7 @@ export function AttendanceNew(props) {
     <div>
       <h1>Attendance</h1>
       <form onSubmit={handleSubmit}>
-        <div className="form-group align-items-center justify-content-center text-center" style={{ width: 200 }}>
+        <div>
           Name:{" "}
           <select className="form-select" name="student_id">
             <option value="" disabled>
@@ -38,11 +38,17 @@ export function AttendanceNew(props) {
           </select>
         </div>
         <div>
-          Date: <input name="date" type="text" defaultValue={new Date().toISOString().split("T")[0]} />
+          Date:{" "}
+          <input
+            className="form-control"
+            name="date"
+            type="text"
+            defaultValue={new Date().toISOString().split("T")[0]}
+          />
         </div>
         <div>
           Presence:{" "}
-          <select name="presence">
+          <select className="form-select" name="presence">
             <option value="" disabled>
               Select presence
             </option>

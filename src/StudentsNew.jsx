@@ -33,17 +33,17 @@ export function StudentsNew(props) {
       <h1>Create a new student</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          Name: <input name="name" type="text" />
+          Name: <input className="form-control" name="name" type="text" />
         </div>
         <div>
-          Image: <input name="image_url" type="text" />
+          Image: <input className="form-control" name="image_url" type="text" />
         </div>
         <div>
           <input defaultValue={teacherid} name="teacher_id" type="text" hidden />
         </div>
         <div>
           Parent:{" "}
-          <select name="user_id">
+          <select className="form-select" name="user_id">
             <option value="" disabled>
               Select a parent
             </option>

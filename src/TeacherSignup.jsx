@@ -66,7 +66,9 @@ export function TeacherSignup() {
         <div>
           Password confirmation: <input name="password_confirmation" type="password" />
         </div>
-        <button type="submit">Signup</button>
+        <button className="btn btn-primary" style={{ margin: 20 }} type="submit">
+          Signup
+        </button>
       </form>
     </div>
   );

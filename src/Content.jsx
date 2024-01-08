@@ -267,9 +267,9 @@ export function Content() {
   const handleDestroyMessage = (message) => {
     console.log("handleDestroyMessage", message);
 
-    if (message && message.id) {
+    if (message) {
       axios
-        .delete(`http://localhost:3000/messages/${message.id}.json`)
+        .delete(`http://localhost:3000/messages/${message}.json`)
         .then((response) => {
           setMessages(messages.filter((p) => p.id !== message.id));
           handleClose();
@@ -279,6 +279,7 @@ export function Content() {
         });
     } else {
       console.error("Error: Message or its ID is undefined");
+      console.log(`message: ${message}, ${message.id}`);
     }
   };
 

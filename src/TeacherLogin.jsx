@@ -68,7 +68,9 @@ export function TeacherLogin() {
         <div>
           Password: <input name="password" type="password" />
         </div>
-        <button type="submit">Login</button>
+        <button className="btn btn-primary" style={{ margin: 20 }} type="submit">
+          Login
+        </button>
       </form>
     </div>
   );

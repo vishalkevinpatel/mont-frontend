@@ -63,7 +63,7 @@ export function UserLogin() {
         <div>
           Password: <input name="password" type="password" />
         </div>
-        <button className="btn" type="submit">
+        <button className="btn btn-primary" style={{ margin: 20 }} type="submit">
           Login
         </button>
       </form>
