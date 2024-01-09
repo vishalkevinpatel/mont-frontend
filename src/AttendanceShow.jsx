@@ -16,9 +16,9 @@ export function AttendanceShow(props) {
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <h1>
-        {props.attendance.student.name}'s Attendance on {props.attendance.date}{" "}
+        {props.attendance.student.name}'s attendance on {props.attendance.date}{" "}
       </h1>
       <form onSubmit={handleSubmit}>
         <p>
@@ -28,13 +28,15 @@ export function AttendanceShow(props) {
             <option value="false">False</option>
           </select>
         </p>
-        <button className="btn btn-primary" style={{ margin: 20 }} type="submit">
-          Update Truancy
-        </button>
+        <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
+          <button className="btn btn-primary" type="submit">
+            Update Truancy
+          </button>
+          <button className="btn btn-primary" onClick={handleClick}>
+            Delete Day
+          </button>
+        </div>
       </form>
-      <button className="btn btn-primary" style={{ margin: 20 }} onClick={handleClick}>
-        Delete Day
-      </button>
     </div>
   );
 }

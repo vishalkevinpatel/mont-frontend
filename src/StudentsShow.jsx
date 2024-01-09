@@ -20,11 +20,11 @@ export function StudentsShow(props) {
       <p>Teacher: {props.student.teacher} </p>
       {props.student.attendances && props.student.attendances.length > 0 && (
         <div>
-          <p>Attendances:</p>
+          <p>Attendances</p>
           <ul className="nobull">
             {props.student.attendances.map((attendance) => (
               <li key={attendance.id}>
-                Date: {attendance.date} Presence: {attendance.presence.toString()}
+                Date: {attendance.date} - Presence: {attendance.presence.toString()}
               </li>
             ))}
           </ul>
