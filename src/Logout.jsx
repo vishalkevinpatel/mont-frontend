@@ -19,6 +19,12 @@ export function LogoutLink() {
       </a>
     );
   } else {
-    return <div> </div>;
+    return (
+      <div>
+        <h6 className="align-items-center justify-content-center text-center">
+          if you have any problems please contact your site adminstrator
+        </h6>{" "}
+      </div>
+    );
   }
 }

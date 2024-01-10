@@ -6,7 +6,9 @@ export function Header() {
   } else {
     return (
       <div>
-        <h3>Please Signup or Login as a teacher or user.</h3>{" "}
+        <h5 className="align-items-center justify-content-center text-center">
+          please signup or login as a user or teacher
+        </h5>{" "}
       </div>
     );
   }
