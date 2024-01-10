@@ -28,7 +28,7 @@ export function MessagesNew(props) {
         <form onSubmit={handleSubmit}>
           <div>
             Name:{" "}
-            <select className="form-select" name="student_id">
+            <select className="form-select" name="student_id" defaultValue="" required>
               <option value="" disabled>
                 Select a student
               </option>
@@ -40,7 +40,7 @@ export function MessagesNew(props) {
             </select>
           </div>
           <div>
-            Message: <textarea className="form-control" id="textarea" name="text" type="text" />
+            Message: <textarea className="form-control" id="textarea" name="text" type="text" required />
           </div>
           {teacherid ? (
             <input name="teacher" type="hidden" value={teacherid} />

@@ -26,7 +26,7 @@ export function AttendanceNew(props) {
       <form onSubmit={handleSubmit}>
         <div>
           Name:{" "}
-          <select className="form-select" name="student_id">
+          <select className="form-select" name="student_id" defaultValue="" required>
             <option value="" disabled>
               Select a student
             </option>

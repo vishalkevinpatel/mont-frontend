@@ -9,6 +9,7 @@ export function AttendanceShow(props) {
     event.preventDefault();
     const params = new FormData(event.target);
     props.onUpdateAttendance(props.attendance.id, params, () => event.target.reset());
+    window.location.href = "/AttendanceIndex";
   };
 
   const handleClick = () => {
