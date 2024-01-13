@@ -55,16 +55,16 @@ export function TeacherSignup() {
       </ul>
       <form onSubmit={handleSubmit}>
         <div>
-          Name: <input name="name" type="text" />
+          Name: <input className="form-control" name="name" type="text" />
         </div>
         <div>
-          Email: <input name="email" type="email" />
+          Email: <input className="form-control" name="email" type="email" />
         </div>
         <div>
-          Password: <input name="password" type="password" />
+          Password: <input className="form-control" name="password" type="password" />
         </div>
         <div>
-          Password confirmation: <input name="password_confirmation" type="password" />
+          Password confirmation: <input className="form-control" name="password_confirmation" type="password" />
         </div>
         <button className="btn btn-primary" style={{ margin: 20 }} type="submit">
           Signup

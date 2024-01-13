@@ -6,9 +6,9 @@ export function Header() {
   } else {
     return (
       <div>
-        <h5 className="align-items-center justify-content-center text-center">
+        <p className="align-items-center justify-content-center text-center">
           please signup or login as a user or teacher
-        </h5>{" "}
+        </p>{" "}
       </div>
     );
   }

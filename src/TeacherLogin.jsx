@@ -63,10 +63,10 @@ export function TeacherLogin() {
       </ul>
       <form onSubmit={handleSubmit}>
         <div>
-          Email: <input name="email" type="email" />
+          Email: <input className="form-control" name="email" type="email" />
         </div>
         <div>
-          Password: <input name="password" type="password" />
+          Password: <input className="form-control" name="password" type="password" />
         </div>
         <button className="btn btn-primary" style={{ margin: 20 }} type="submit">
           Login
