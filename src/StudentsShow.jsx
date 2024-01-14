@@ -46,13 +46,15 @@ export function StudentsShow(props) {
             <div>
               Parent: <input defaultValue={props.student.user} name="user" type="text" />
             </div>
+          </form>
+          <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
             <button className="btn btn-primary" style={{ margin: 20 }} type="submit">
               Update info
             </button>
-          </form>
-          <button className="btn btn-primary" style={{ margin: 20 }} onClick={handleClick}>
-            Erase Student File
-          </button>
+            <button className="btn btn-primary" style={{ margin: 20 }} onClick={handleClick}>
+              Erase Student File
+            </button>
+          </div>
         </>
       )}
     </div>

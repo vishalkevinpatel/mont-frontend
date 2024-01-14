@@ -14,7 +14,7 @@ export function LogoutLink() {
   const teacherid = localStorage.getItem("teacher_id") === null;
   if (!userid || !teacherid) {
     return (
-      <a href="#" onClick={handleClick}>
+      <a style={{ display: "flex", justifyContent: "center", gap: "10px" }} href="#" onClick={handleClick}>
         Logout
       </a>
     );
