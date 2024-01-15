@@ -35,16 +35,18 @@ export function StudentsShow(props) {
           <p>Parent: {props.student.user} </p>
           <form onSubmit={handleSubmit}>
             <div>
-              Name: <input defaultValue={props.student.name} name="name" type="text" />
+              Name: <input className="form-control" defaultValue={props.student.name} name="name" type="text" />
             </div>
             <div>
-              Image: <input defaultValue={props.student.image_url} name="image_ulr" type="text" />
+              Image:{" "}
+              <input className="form-control" defaultValue={props.student.image_url} name="image_ulr" type="text" />
             </div>
             <div>
-              Teacher: <input defaultValue={props.student.teacher.name} name="teacher" type="text" />
+              Teacher:{" "}
+              <input className="form-control" defaultValue={props.student.teacher.name} name="teacher" type="text" />
             </div>
             <div>
-              Parent: <input defaultValue={props.student.user} name="user" type="text" />
+              Parent: <input className="form-control" defaultValue={props.student.user} name="user" type="text" />
             </div>
           </form>
           <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
