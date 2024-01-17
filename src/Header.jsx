@@ -7,7 +7,7 @@ export function Header() {
     return (
       <div>
         <p className="align-items-center justify-content-center text-center">
-          please signup or login as a user or teacher
+          please signup or login as a user or teacher if not registered
         </p>{" "}
       </div>
     );
